@@ -1,0 +1,37 @@
+version: '2'
+services:
+  db:
+    environment:
+      POSTGRES_USER: foodie
+      POSTGRES_PASSWORD: foodie
+      POSTGRES_DB: foodtrucks
+      LC_ALL: C.UTF-8
+    ports:
+      - "15432:5432"      
+    build:
+      context: ./db
+      dockerfile: Dockerfile.postgres
+
+  # db:
+  #   build: ./db
+  #   image: postgres
+  #   command: ./setup.sh
+  #   ports:
+  #     - "15432:5432"
+  #   environment:
+  #     LC_ALL: C.UTF-8
+  #     POSTGRES_PASSWORD: password #username is postgres
+
+  web:
+    build: .
+    command: node index.js
+    volumes:
+      - .:/myapp
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=localhost:15432
+
+

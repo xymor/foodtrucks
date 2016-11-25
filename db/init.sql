@@ -1,0 +1,3 @@
+-- CREATE DATABASE foodtrucks;
+-- CREATE USER foodie WITH PASSWORD 'password';
+-- GRANT ALL PRIVILEGES ON DATABASE "foodtrucks" to foodie;
